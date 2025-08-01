@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Vdlp\Redirect\VueComponents;
 
+use Backend\Classes\Controller;
 use Backend\Helpers\Backend;
 use Dashboard\Classes\DashReport;
 use Dashboard\Classes\ReportFetchData;
 use Dashboard\Classes\VueReportWidgetBase;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
-use InvalidArgumentException;
 use Vdlp\Redirect\Models\Redirect;
 
 class CreateRedirect extends VueReportWidgetBase
@@ -18,9 +18,9 @@ class CreateRedirect extends VueReportWidgetBase
     private Backend $backend;
     private Redirector $redirect;
 
-    public function __construct($controller, DashReport $dashReport = null, array $properties = [])
+    public function __construct(Controller $controller, ?DashReport $dashReport = null, array $properties = [])
     {
-        parent::__construct($controller, $dashReport = null, $properties = []);
+        parent::__construct($controller, $dashReport, $properties);
 
         $this->redirect = resolve(Redirector::class);
         $this->backend = resolve(Backend::class);
